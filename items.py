@@ -30,9 +30,9 @@ class Items:
                  2 (Value): "))
             update = input("Valor por el cual lo desea modificar: ")
             self.itemDao.updateItem(id_item, column, update)
-            self.printAllCategories()
+            self.printAllItems()
         elif action == "3":
-            self.printAllCategories()
+            self.printAllItems()
             id_delete = int(input("Ingrese el id del item a eliminar: "))
             self.itemDao.deleteItem(id_delete)
             self.printAllItems()
@@ -42,7 +42,7 @@ class Items:
             print("Ingrese un número válido")
 
     def printAllItems(self):
-        table = PrettyTable(["Id", "Tipo", "Descripción", "Valor"])
+        table = PrettyTable(["Id", "Id Tipo", "Descripción", "Valor"])
         all_items = self.itemDao.getAllItems()
         for item in all_items:
             table.add_row(item)

@@ -4,6 +4,7 @@ from DBconnection import DBconnection
 from customers import Customers
 from itemCategories import ItemCategories
 from items import Items
+from bills import Bills
 
 def main():
 
@@ -25,7 +26,7 @@ def main():
         elif action == "3":
             item = Items(db)
         elif action == "4":
-            pass
+            bill = Bills(db)
         elif action == "5":
             exit()
         else:
