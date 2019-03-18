@@ -13,7 +13,7 @@ class ItemCategoryDao:
         return all_categories
 
     def updateCategory(self, category_id, update):
-        update_category = "UPDATE categories SET description = '%s' WHERE id = %d"\
+        update_category = "UPDATE categories SET description = '%s' WHERE id = %d ;"\
                             % (update, category_id)
         self.db.execute(update_category)
         self.db.commit()

@@ -24,7 +24,7 @@ class CustomerDao:
             col = "birthday"
         else:
             col = "civil"
-        update_customer = "UPDATE customers SET %s = '%s' WHERE id = %d"\
+        update_customer = "UPDATE customers SET %s = '%s' WHERE id = %d ;"\
                             % (col, update, customer_id)
         self.db.execute(update_customer)
         self.db.commit()

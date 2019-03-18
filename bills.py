@@ -33,14 +33,14 @@ class Bills:
             column = int(input("Ingrese la columna a cambiar: 0 (Fecha), 1 (Cliente),\
                  2 (Valor), 3 (Estado), 4 (items): "))
             if column == "4":
-                n_items = input("Número de items a ingresar: ")
+                n_items = int(input("Número de items a ingresar: "))
                 items = ""
-                for item in range(int(n_items)):
+                for item in range(n_items):
                     aux = input("Ingrese el id del item: ")
+                    items += aux
                     if item != n_items - 1:
                         items += "-"
-                    items += aux
-                update = items[:len(items)-1]
+                update = items
             else:
                 update = input("Valor por el cual lo desea modificar: ")
             self.billDao.updateBill(id_bill, column, update)
