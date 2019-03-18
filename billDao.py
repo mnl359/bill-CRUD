@@ -27,19 +27,21 @@ class BillDao:
         elif column == "4":
             col = "items"
             item_update = 1
-        update_bill = "UPDATE bills SET %s = '%s' WHERE id = %d"\
+        update_bill = "UPDATE bills SET %s = '%s' WHERE id = %d ;"\
                             % (col, update, bill_id)
         if item_update == 1:
             bill_value = 0
             items = update.split(" ")
             for item in items:
-                exec_item = "SELECT value FROM items WHERE id = %s" % (item)
+                exec_item = "SELECT value FROM items WHERE id = %s ;" % (item)
                 item_cursor = self.db.execute(exec_item)
                 for item_row in item_cursor:
                     bill_value += int(item_row[0])
                     break
-            update_value = ("UPDATE bills SET value = '%d' WHERE id = %d"\
+            update_value = ("UPDATE bills SET value = '%d' WHERE id = %d ;"\
                             % (bill_value, bill_id))
+            self.db.execute(update_value)
+            self.db.commit()
         self.db.execute(update_bill)
         self.db.commit()
 
@@ -71,11 +73,12 @@ class BillDao:
         bill_value = 0
         items = bill.items.split("-")
         for item in items:
-            exec_item = "SELECT value FROM items WHERE id = %s" % (item)
-            item_cursor = self.db.execute(exec_item)
-            for item_row in item_cursor:
-                bill_value += int(item_row[0])
-                break
+            if len(item) > 0:
+                exec_item = "SELECT value FROM items WHERE id = %s ;" % (item)
+                item_cursor = self.db.execute(exec_item)
+                for item_row in item_cursor:
+                    bill_value += int(item_row[0])
+                    break
         self.db.execute("INSERT INTO bills (id, date, client, value,\
                          state, items) VALUES (?,?,?,?,?,?);" , (bill_id,
                              bill.date, bill.client, bill_value, bill.state,

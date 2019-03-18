@@ -22,10 +22,10 @@ class Bills:
             n_items = input("Número de items a ingresar: ")
             items = ""
             for item in range(int(n_items)):
-                aux = input("Ingrese el id del item") + "-"
+                aux = input("Ingrese el id del item: ") + "-"
                 items += aux
             new_bill = Bill(date, client, state, items)
-            self.itemDao.addBill(new_bill)
+            self.billDao.addBill(new_bill)
             self.printAllBills()
         elif action == "2":
             self.printAllBills()
@@ -36,9 +36,11 @@ class Bills:
                 n_items = input("Número de items a ingresar: ")
                 items = ""
                 for item in range(int(n_items)):
-                    aux = input("Ingrese el id del item") + "-"
+                    aux = input("Ingrese el id del item: ")
+                    if item != n_items - 1:
+                        items += "-"
                     items += aux
-                update = items
+                update = items[:len(items)-1]
             else:
                 update = input("Valor por el cual lo desea modificar: ")
             self.billDao.updateBill(id_bill, column, update)

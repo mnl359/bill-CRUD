@@ -5,7 +5,7 @@ class ItemDao:
         self.db = db
 
     def getAllItems(self):
-        get_items = "SELECT * FROM items;"
+        get_items = "SELECT * FROM items ORDER BY type ASC;"
         cursor = self.db.execute(get_items)
         all_items = []
         for item in cursor:
@@ -21,7 +21,7 @@ class ItemDao:
         elif column == "2":
             col = "value"
             update = int(update)
-        update_item = "UPDATE items SET %s = '%s' WHERE id = %d"\
+        update_item = "UPDATE items SET %s = '%s' WHERE id = %d ;"\
                             % (col, update, item_id)
         self.db.execute(update_item)
         self.db.commit()
